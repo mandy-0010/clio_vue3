@@ -14,22 +14,24 @@
 </template>
 
 <script setup>
-  import { storeToRefs } from 'pinia';
-  import Sidebar from '@/components/Sidebar';
-  import Navbar from '@/components/Navbar';
-  import Alert from '@/components/AlertMessage';
-  import  statusStore from '../stores/statusStore';
+import { storeToRefs } from 'pinia'
+import Sidebar from '@/components/Sidebar'
+import Navbar from '@/components/Navbar'
+import Alert from '@/components/AlertMessage'
+import statusStore from '@/stores/statusStore'
 
-components: {  Sidebar,Navbar,AlertMessage }
+{
+  Sidebar, Navbar, AlertMessage
+}
 
-const status=statusStore();
-const {isLoading}=storeToRefs(status);
-const {messages}=storeToRefs(status);
+const status = statusStore()
+const { isLoading } = storeToRefs(status)
+const { messages } = storeToRefs(status)
 
-created(){
-   const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-   this.$http.defaults.headers.common.Authorization = `${token}`;
-
-
- };
+onMounted(() => {
+  const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+  // 假設你有 axios 實例
+  // 例如 import axios from '@/http' 或 this.$http 改成 axios
+  axios.defaults.headers.common.Authorization = `${token}`
+})
 </script>

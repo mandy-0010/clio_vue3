@@ -1,106 +1,66 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-//後台頁
-import Signout from '@/components/Signout'
-import Dashboard from '@/components/Dashboard'
-import Login from '@/components/backstage/Login'
 
-import Products from '@/components/backstage/Products'
+// 後台頁
+import Signout from '@/components/Signout.vue'
+import Dashboard from '@/components/Dashboard.vue'
+import Login from '@/components/backstage/Login.vue'
+import Products from '@/components/backstage/Products.vue'
+import Coupons from '@/components/backstage/Coupons.vue'
+import Orders from '@/components/backstage/Orders.vue'
+import CustomerOrder from '@/components/backstage/CustomerOrder.vue'
 
-import Coupons from '@/components/backstage/Coupons'
-import Orders from '@/components/backstage/Orders'
-import CustomerOrder from '@/components/backstage/CustomerOrders'
+// 前台頁面
+import Jindex from '@/components/fpages/Jindex.vue'
+import Productlist from '@/components/fpages/Productlist.vue'
+import Checkout from '@/components/fpages/Checkout.vue'
+import Checkorder from '@/components/fpages/Checkorder.vue'
+import Final from '@/components/fpages/Final.vue'
+import About from '@/components/fpages/About.vue'
+import Contact from '@/components/fpages/Contact.vue'
 
-//前台頁面
-import Jindex from '@/components/fpages/Jindex'
-import Productlist from '@/components/fpages/Productlist'
+const routes = [
+  // 前台
+  { path: '/jindex', name: 'Jindex', component: Jindex },
+  { path: '/productlist', name: 'Productlist', component: Productlist },
+  { path: '/checkout', name: 'Checkout', component: Checkout },
+  { path: '/checkorder', name: 'Checkorder', component: Checkorder },
+  { path: '/final/:orderId', name: 'Final', component: Final },
+  { path: '/about', name: 'About', component: About },
+  { path: '/contact', name: 'Contact', component: Contact },
 
-import Checkout from '@/components/fpages/Checkout'
-import Checkorder from '@/components/fpages/Checkorder'
-import Final from '@/components/fpages/Final'
-import About from '@/components/fpages/About'
-import Contact from '@/components/fpages/Contact'
+  // 後台登入
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/signout', name: 'Signout', component: Signout },
+
+  // 後台 Dashboard + 子路由
+  {
+    path: '/admin',
+    name: 'Dashboard',
+    component: Dashboard,
+    children: [
+      { path: 'products', name: 'Products', component: Products, meta: { requiresAuth: true } },
+      { path: 'coupons', name: 'Coupons', component: Coupons, meta: { requiresAuth: true } },
+      { path: 'orders', name: 'Orders', component: Orders, meta: { requiresAuth: true } },
+      { path: 'customer_order', name: 'CustomerOrder', component: CustomerOrder },
+    ],
+  },
+
+  // 預設導向
+  { path: '/', redirect: '/jindex' },
+]
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      name: 'Jindex', //元件呈現的名稱
-      path: '/jindex', //對應的虛擬路徑
-      component: Jindex, //對應的元件
-    },
-    {
-      name: 'Checkout', //元件呈現的名稱
-      path: '/checkout', //對應的虛擬路徑
-      component: Checkout, //對應的元件
-    },
-    {
-      name: 'Checkorder', //元件呈現的名稱
-      path: '/checkorder', //對應的虛擬路徑
-      component: Checkorder, //對應的元件
-    },
-    {
-      name: 'Final', //元件呈現的名稱
-      path: '/final/:orderId', //對應的虛擬路徑
-      component: Final, //對應的元件
-    },
-    {
-      name: 'About', //元件呈現的名稱
-      path: '/about', //對應的虛擬路徑
-      component: About, //對應的元件
-    },
-    {
-      name: 'Contact', //元件呈現的名稱
-      path: '/contact', //對應的虛擬路徑
-      component: Contact, //對應的元件
-    },
-    {
-      name: 'Productlist', //元件呈現的名稱
-      path: '/productlist', //對應的虛擬路徑
-      component: Productlist, //對應的元件
-    },
-    {
-      name: 'Login', //元件呈現的名稱
-      path: '/login', //對應的虛擬路徑
-      component: Login, //對應的元件
-    },
-    {
-      name: 'Dashboard', //元件呈現的名稱
-      path: '/admin', //對應的虛擬路徑
-      component: Dashboard, //對應的元件
-      children: [
-        {
-          path: 'products',
-          name: 'Products',
-          component: Products,
-          meta: { requiresAuth: true },
-        },
-        {
-          path: 'coupons',
-          name: 'Coupons',
-          component: Coupons,
-          meta: { requiresAuth: true },
-        },
-        {
-          path: 'orders',
-          name: 'Orders',
-          component: Orders,
-          meta: { requiresAuth: true },
-        },
-      ],
-    },
-    {
-      path: '/',
-      name: 'Dashboard',
-      component: Dashboard,
-      children: [
-        {
-          path: 'customer_order',
-          name: 'CustomerOrder',
-          component: CustomerOrder,
-        },
-      ],
-    },
-  ],
+  routes,
+})
+
+// 全域 guard (檢查登入)
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
+    if (!token) return next('/login')
+  }
+  next()
 })
 
 export default router

@@ -273,38 +273,46 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import $ from 'jquery'
+import { storeToRefs } from 'pinia'
 
+// Stores
+import statusStore from '../stores/statusStore'
+import productStore from '../stores/productStore'
+import favoriteStore from '../stores/favoriteStore'
 
-import $ from 'jquery';
-import  {storeToRefs} from 'pinia';
-import statusStore from '../stores/statusStore';
-import productStore from '../stores/productStore';
-import  favoriteStore from '../stores/favoriteStore';
-import Alert from '@/components/AlertMessage';
+// Components
+import Alert from '@/components/AlertMessage.vue'
 
-components: {
-    Alert,
+// 初始化 store
+const status = statusStore()
+const product = productStore()
+const favorite = favoriteStore()
+
+// 解構 store 的 refs
+const { products, productId, filterProducts } = storeToRefs(product)
+const { messages, isLoading } = storeToRefs(status)
+
+// Store 函式
+const { getProducts } = product
+const { addFavorite, removeFavorite, getFavorite } = favorite
+
+// 本地 state
+const form = ref({
+  user: {
+    name: '',
+    email: '',
+    tel: '',
+    address: '',
   },
+})
 
-  const status =statusStore();
-  const product =productStore();
-  const favorite =favoriteStore();
-  const {prosucts,product,productid,filterProducts} =storeToRefs(product);
-  const {messages}=storeToRefs(status);
-  const {getProducts}=product;
-  const form=ref ( {
-    user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: '',
-        },
-        } );
+const cart = ref({
+  carts: [],
+  total: 0,
+  final_total: 0,
+})
 
-  const cart =ref({});
-  const { isLoading}=storeToRefs(status);
-  const coupon_code=ref();
-  const {addFavorite(product)}=favorite;
-  const {removeFavorite(favoriteItem: favorite, delall)}=favorite;
-  const {getFavorite(product)}=favorite;
+const coupon_code = ref()
 </script>
