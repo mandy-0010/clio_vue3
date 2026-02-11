@@ -258,7 +258,7 @@
 <script>
 import $ from 'jquery'
 import { mapGetters, mapActions } from 'vuex'
-import Alert from '@/components/AlertMessage'
+import Alert from '@/components/AlertMessage.vue'
 
 export default {
   components: {

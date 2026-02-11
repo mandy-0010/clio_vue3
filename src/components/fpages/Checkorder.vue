@@ -171,9 +171,9 @@ import { ref, computed } from 'vue'
 import $ from 'jquery'
 import { storeToRefs } from 'pinia'
 
-import statusStore from '../stores/statusStore'
-import productStore from '../stores/productStore'
-import favoriteStore from '../stores/favoriteStore'
+import statusStore from '@/stores/statusStore'
+import productStore from '@/stores/productStore'
+import favoriteStore from '@/stores/favoriteStore'
 
 import Alert from '@/components/AlertMessage.vue'
 

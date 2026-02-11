@@ -7,7 +7,7 @@ import Login from '@/components/backstage/Login.vue'
 import Products from '@/components/backstage/Products.vue'
 import Coupons from '@/components/backstage/Coupons.vue'
 import Orders from '@/components/backstage/Orders.vue'
-import CustomerOrder from '@/components/backstage/CustomerOrder.vue'
+import CustomerOrders from '@/components/backstage/CustomerOrders.vue'
 
 // 前台頁面
 import Jindex from '@/components/fpages/Jindex.vue'

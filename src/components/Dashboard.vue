@@ -14,15 +14,13 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import Sidebar from '@/components/Sidebar'
-import Navbar from '@/components/Navbar'
-import Alert from '@/components/AlertMessage'
+import Sidebar from '@/components/Sidebar.vue'
+import Navbar from '@/components/Navbar.vue'
+import Alert from '@/components/AlertMessage.vue'
 import statusStore from '@/stores/statusStore'
-
-{
-  Sidebar, Navbar, AlertMessage
-}
+import axios from 'axios'
 
 const status = statusStore()
 const { isLoading } = storeToRefs(status)

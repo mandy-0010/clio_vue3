@@ -220,9 +220,9 @@ import axios from 'axios'
 //import $ from 'jquery'
 import { storeToRefs } from 'pinia'
 
-import productStore from '../stores/productStore'
-import favoriteStore from '../stores/favoriteStore'
-import statusStore from '../stores/statusStore'
+import productStore from '@/stores/productStore'
+import favoriteStore from '@/stores/favoriteStore'
+import statusStore from '@/stores/statusStore'
 import Alert from '@/components/AlertMessage.vue'
 
 //created() 是 Options API，用在 <script setup> 裡會錯

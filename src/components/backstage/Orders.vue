@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import Pagination from '../Pagination'
+import Pagination from '@/components/Pagination.vue'
 export default {
   data() {
     return {
