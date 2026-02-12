@@ -1,14 +1,12 @@
 import axios from 'axios'
-import statusStore from '../stores/statusStore'
 import { defineStore } from 'pinia'
+import { useStatusStore } from './statusStore' // 🔴 在 action 裡呼叫
 
-const status = statusStore()
-
-export default defineStore('productStore', {
+export const useProductStore = defineStore('productStore', {
   state: () => ({
     products: [],
-    product: {}, // 單一產品
-    productid: '', // 單一產品 ID
+    product: {},
+    productid: '',
   }),
 
   getters: {
@@ -27,6 +25,8 @@ export default defineStore('productStore', {
 
   actions: {
     getProducts({ isPagination, page }) {
+      const status = useStatusStore() // 🔴 在 action 裡呼叫
+
       let api
       if (isPagination) {
         api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://mandy-0010.github.io/clio_vue3",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

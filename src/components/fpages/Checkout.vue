@@ -274,29 +274,29 @@
 
 <script setup>
 import { ref } from 'vue'
-import $ from 'jquery'
 import { storeToRefs } from 'pinia'
 
-// Stores
-import statusStore from '@/stores/statusStore'
-import productStore from '@/stores/productStore'
-import favoriteStore from '@/stores/favoriteStore'
+// 🔴 正確的 store import
+import { useStatusStore } from '@/stores/statusStore'
+import { useProductStore } from '@/stores/productStore'
+import { useCartStore } from '@/stores/favoriteStore' // 注意這裡用 useCartStore
 
 // Components
 import Alert from '@/components/AlertMessage.vue'
 
-// 初始化 store
-const status = statusStore()
-const product = productStore()
-const favorite = favoriteStore()
+// 🔴 初始化 store
+const status = useStatusStore()
+const product = useProductStore()
+const favorite = useCartStore()
 
 // 解構 store 的 refs
 const { products, productId, filterProducts } = storeToRefs(product)
 const { messages, isLoading } = storeToRefs(status)
+const { favorites, favoritesLength } = storeToRefs(favorite)
 
 // Store 函式
 const { getProducts } = product
-const { addFavorite, removeFavorite, getFavorite } = favorite
+const { addToFavorite, removeFavorite, getFavorite } = favorite
 
 // 本地 state
 const form = ref({

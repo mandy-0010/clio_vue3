@@ -6,10 +6,10 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-const pinia = createPinia() //vue3
-const app = createApp(App) //vue3
+const app = createApp(App)
+const pinia = createPinia() // 建立一次 Pinia 實例
 
-app.use(pinia)
+app.use(pinia) // 使用同一個 Pinia
 app.use(router)
-//createApp(App).use(router).mount('#app') //vue3 寫法
+
 app.mount('#app')

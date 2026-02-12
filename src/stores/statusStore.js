@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export default defineStore('statusStore', {
+export const useStatusStore = defineStore('statusStore', {
   state: () => ({
     isLoading: false,
     pagination: {},
@@ -10,13 +10,7 @@ export default defineStore('statusStore', {
   actions: {
     updateMessage({ message, status }) {
       const timestamp = Math.floor(Date.now() / 1000)
-      const msg = {
-        message,
-        status,
-        timestamp,
-      }
-
-      this.messages.push(msg)
+      this.messages.push({ message, status, timestamp })
       this.removeMessageWithTiming(timestamp)
     },
 

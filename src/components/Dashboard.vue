@@ -19,10 +19,11 @@ import { storeToRefs } from 'pinia'
 import Sidebar from '@/components/Sidebar.vue'
 import Navbar from '@/components/Navbar.vue'
 import Alert from '@/components/AlertMessage.vue'
-import statusStore from '@/stores/statusStore'
+// 🔴 修改點：具名 import
+import { useStatusStore } from '@/stores/statusStore'
 import axios from 'axios'
 
-const status = statusStore()
+const status = useStatusStore() // 🔴 不要在 import 頂層呼叫
 const { isLoading } = storeToRefs(status)
 const { messages } = storeToRefs(status)
 
