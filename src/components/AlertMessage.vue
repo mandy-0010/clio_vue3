@@ -16,7 +16,7 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import statusStore from '../stores/statusStore'
+import Alert from '@/components/AlertMessage.vue'
 
 const status = statusStore()
 const { messages } = storeToRefs(status)

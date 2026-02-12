@@ -246,12 +246,12 @@
 
 import $ from 'jquery';
 import { mapGetters, mapActions } from 'vuex';
-import Alert from '@/components/AlertMessage';
+import AlertMessage from '@/components/AlertMessage.vue';
 
  export default {
   name: 'Productlist',
   components: {
-    Alert,
+    AlertMessage,
   },
   data() {
     return {

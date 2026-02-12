@@ -278,9 +278,9 @@ import $ from 'jquery'
 import { storeToRefs } from 'pinia'
 
 // Stores
-import statusStore from '../stores/statusStore'
-import productStore from '../stores/productStore'
-import favoriteStore from '../stores/favoriteStore'
+import statusStore from '@/stores/statusStore'
+import productStore from '@/stores/productStore'
+import favoriteStore from '@/stores/favoriteStore'
 
 // Components
 import Alert from '@/components/AlertMessage.vue'

@@ -237,7 +237,7 @@
 
 <script>
 import $ from 'jquery'
-import Pagination from '../Pagination'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   data() {
@@ -336,7 +336,7 @@ export default {
           if (response.data.success) {
             // vm.tempProduct.imageUrl = response.data.imageUrl;
             // console.log(vm.tempProduct);
-            vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl)
+            vm.tempProduct.imageUrl = response.data.imageUrl
           } else {
             this.$bus.$emit('messsage:push', response.data.message, 'danger')
           }
